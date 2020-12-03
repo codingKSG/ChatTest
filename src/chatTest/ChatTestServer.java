@@ -31,6 +31,7 @@ public class ChatTestServer {
 				ClientInfo clientInfo = new ClientInfo(socket);
 				clientInfo.start();
 				vc.add(clientInfo);
+				
 			}
 		} catch (IOException e) {
 			System.out.println(TAG + "서버 연결 오류" + e.getMessage());
@@ -105,14 +106,14 @@ public class ChatTestServer {
 				if (gubun[0].equals(Protocol.ALL)) {
 					save(gubun[1]);
 					for (int i = 0; i < vc.size(); i++) {
-						if (vc.get(i).id != this.id) {
+						if (vc.get(i).id != this.id && vc.get(i).id != null) {
 							vc.get(i).writer.println("[" + this.id + "] " + gubun[1]);
 						}
 					}
 				} else if (gubun[0].equals(Protocol.TO)) {
 					for (int i = 0; i < vc.size(); i++) {
 						if (vc.get(i).id.equals(gubun[1])) {
-							vc.get(i).writer.println("[귓속말:" + this.id + "] " + gubun[2]);
+							vc.get(i).writer.println("[" + this.id + "] >>" + gubun[2]);
 						}
 					}
 				} else {

@@ -57,7 +57,7 @@ public class ChatTestClient extends JFrame {
 	private void init() {
 		btnConnect = new JButton("Connect");
 		btnSend = new JButton("send");
-		tfHost = new JTextField("127.0.0.1", 20);
+		tfHost = new JTextField(20);
 		tfChat = new JTextField(20);
 		taChatList = new JTextArea(10, 30); //row(행), column(열)
 		scrollPane = new ScrollPane();
@@ -151,6 +151,9 @@ public class ChatTestClient extends JFrame {
 			ReaderThread rt = new ReaderThread();
 			rt.start();
 			
+			taChatList.append("["+host+"] "+"서버에 입장하셨습니다.\n");
+			taChatList.append("ID를 등록해 주십시오.\n\n");
+			
 		} catch (Exception e1) {
 			System.out.println(TAG+ "서버 연결 오류" + e1.getMessage());
 		}
@@ -165,7 +168,7 @@ public class ChatTestClient extends JFrame {
 		if(gubun[0].equals(Protocol.ALL)) {
 			taChatList.append("[내 메세지] " + gubun[1] + "\n");
 		}else if(gubun[0].equals(Protocol.TO)) {
-			taChatList.append("["+ gubun[1 ]+">>] " + gubun[2] + "\n");
+			taChatList.append(">>["+ gubun[1 ]+"] " + gubun[2] + "\n");
 		}
 		
 		// 2번 서버로 전송
